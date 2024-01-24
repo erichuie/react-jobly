@@ -55,8 +55,15 @@ class JoblyApi {
   /** Get all companies */
 
   static async getAllCompanies(){
-    const companiesData = await this.request(`companies/`)
+    const companiesData = await this.request(`companies/`);
     return companiesData.companies;
+  }
+
+  /**Filter companies */
+  static async getFilteredCompanies(searchName){
+    const filteredCompaniesData =
+      await this.request(`companies/`, {"nameLike": "Baker-Santos"});
+    return filteredCompaniesData.companies;
   }
 
   // obviously, you'll add a lot here ...

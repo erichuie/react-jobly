@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import JoblyApi from "./api";
+import CompanyCard from "./CompanyCard";
+import SearchForm from "./SearchForm";
 
 /**
  * CompaniesList - get all companies from API and show company data
@@ -37,27 +39,32 @@ function CompaniesList() {
     getCompanies();
   }, []);
 
-  if (companiesData.isLoading) return <i>...R2D2 noises ...</i>;
+  async function filterCompanies(searchQuery){
+    console.log("searchQuery", searchQuery)
+    const companyResults = await JoblyApi.getFilteredCompanies(searchQuery);
+    console.log("test this works companyResults", companyResults);
+    setCompaniesData(() => {
+      return {
+      data: companyResults,
+      isLoading:false
+    }});
 
-  const companyCards = companiesData.data.map((company)=>{
-    return (<li>
-      <div>
-        {company.name}
-      </div>
-      <div>
-        {company.description}
-      </div>
-      <div>
-        {company.logoUrl}
-      </div>
-    </li>)
-  })
+  }
+
+  if (companiesData.isLoading) return <i>...R2D2 noises ...</i>;
 
   return (
     <div className="CompaniesList">
-      <ul>
-        {companyCards};
-      </ul>
+      <SearchForm filterCompanies={filterCompanies}/>
+      {companiesData.data.map((company)=>{
+        return(
+          <CompanyCard
+            name = {company.name}
+            description = {company.description}
+            logoUrl = {company.logoUrl}
+          />
+        );
+      })}
     </div>
   );
 }
