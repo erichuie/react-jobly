@@ -15,29 +15,49 @@ import JoblyApi from "./api";
 */
 
 function CompaniesList() {
-  console.log("CompaniesList");
   const [companiesData, setCompaniesData] =
-    useState({ data: null, isLoading: false });
+  useState({ data: null, isLoading: true });
 
+  console.log("CompaniesList, state:", companiesData);
 
   //this page renders and we want to grab all the companies as soon as we can
   // use effect to make api request to get the companies
 
   useEffect(function fetchAndSetCompaniesData() {
-    async function getCompanies(companiesData) {
+    async function getCompanies() {
       let companyResults = await JoblyApi.getAllCompanies();
+
+      console.log("CompaniesList, useEffect results:", companyResults);
 
       setCompaniesData({
         data: companyResults,
-        isLoading: true
-      },);//TODO: come back to me
+        isLoading: false
+      });
     }
-  }, [companiesData]);
+    getCompanies();
+  }, []);
 
   if (companiesData.isLoading) return <i>...R2D2 noises ...</i>;
+
+  const companyCards = companiesData.data.map((company)=>{
+    return (<li>
+      <div>
+        {company.name}
+      </div>
+      <div>
+        {company.description}
+      </div>
+      <div>
+        {company.logoUrl}
+      </div>
+    </li>)
+  })
+
   return (
     <div className="CompaniesList">
-
+      <ul>
+        {companyCards};
+      </ul>
     </div>
   );
 }
