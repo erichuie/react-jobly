@@ -25,6 +25,7 @@ function CompanyDetails() {
   console.log("CompanyDetails", companyData);
 
   useEffect(function fetchAndSetCompanyData() {
+    console.log("test use effect ran");
     async function getCompany() {
       let companyResults = await JoblyApi.getCompany(handle);
 
@@ -36,7 +37,9 @@ function CompanyDetails() {
       });
     }
     getCompany();
-  }, []);
+  }, [handle]); //need to add handle here so that useEffect will run and
+  //companyData will re render with new data if go to different company url from
+  //previous company url
 
   if (companyData.isLoading) return <i>...R2D2 noises ...</i>;
 

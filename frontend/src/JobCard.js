@@ -12,6 +12,7 @@
 
 function JobCard({ job }) {
 
+  //check for salary exist otherwise dont show job
   return (
     <div className="JobCard">
       <h3>{job.title}</h3>

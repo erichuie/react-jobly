@@ -52,12 +52,13 @@ function CompaniesList() {
 
   if (companiesData.isLoading) return <i>...R2D2 noises ...</i>;
 
+  //when searching should have some message prompt show up; could show num results returned
   return (
     <div className="CompaniesList">
       <SearchForm searchFunction={filterCompanies} />
       {companiesData.data.map((company) => {
         return (
-          <CompanyCard
+          <CompanyCard//addkey here
             name={company.name}
             description={company.description}
             logoUrl={company.logoUrl}

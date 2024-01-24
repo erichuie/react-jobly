@@ -52,6 +52,7 @@ class JoblyApi {
     return res.company;
   }
 
+  //could possibly combine getAll and getFiltered
   /** Get all companies */
 
   static async getAllCompanies() {
@@ -66,6 +67,7 @@ class JoblyApi {
     return filteredCompaniesData.companies;
   }
 
+  //could possibly combine getAll and getFiltered
   /** Get all jobs */
 
   static async getAllJobs() {
