@@ -2,6 +2,7 @@
 /**Renders homepage of application */
 
 function Homepage(){
+  console.log("Homepage");
   return(
     <div>
       <h1>Jobly</h1>
