@@ -51,3 +51,25 @@
   width:50px;
   height: 50px;
 }
+
+.JobCard{
+  display:flex;
+  flex-direction: column;
+  border: black solid;
+  border-radius: 10px;
+  margin: 5px;
+  margin-left: 75px;
+  margin-right: 75px;
+  padding: 5px;
+}
+
+.Navigation{
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.Navigation-link{
+  margin: 10px;
+
+}

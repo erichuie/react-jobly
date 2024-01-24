@@ -10,13 +10,15 @@
 */
 
 
-function JobCard({ job }){
+function JobCard({ job }) {
 
   return (
     <div className="JobCard">
-
+      <h3>{job.title}</h3>
+      <p>{job.salary}</p>
+      <p>{job.equity}</p>
     </div>
-  )
+  );
 }
 
 export default JobCard;

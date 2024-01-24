@@ -12,31 +12,31 @@ import { useState } from "react";
  * RoutesList -> CompaniesList, JobsList -> SearchForm
 */
 
-function SearchForm({ filterCompanies }){
-  console.log("SearchForm", filterCompanies);
+function SearchForm({ searchFunction }) {
+  console.log("SearchForm", searchFunction);
 
   const [formData, setFormData] = useState("");
 
-  function handleChange(evt){
+  function handleChange(evt) {
     const input = evt.target;
     setFormData(() => ({
       [input.name]: input.value
-    }))
+    }));
   }
 
-  function handleSubmit(evt){
+  function handleSubmit(evt) {
     evt.preventDefault();
-    filterCompanies(formData.searchQuery);
+    searchFunction(formData.searchQuery);
     setFormData("");
   }
 
-  return(
+  return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
-        name="searchQuery"
-        value={formData.searchQuery}
-        onChange={handleChange}>
+          name="searchQuery"
+          value={formData.searchQuery}
+          onChange={handleChange}>
         </input>
         <button>Submit</button>
       </form>

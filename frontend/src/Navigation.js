@@ -14,14 +14,14 @@ import { NavLink } from "react-router-dom";
 function Navigation() {
   console.log("Navigation");
   return (
-    <div>
-      <NavLink to={"/"}>
+    <div className="Navigation">
+      <NavLink className="Navigation-link" to={"/"}>
         Jobly
       </NavLink>
-      <NavLink to={"/companies"}>
+      <NavLink className="Navigation-link" to={"/companies"}>
         Companies
       </NavLink>
-      <NavLink to={"/jobs"}>
+      <NavLink className="Navigation-link" to={"/jobs"}>
         Jobs
       </NavLink>
     </div>

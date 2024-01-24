@@ -18,7 +18,7 @@ import SearchForm from "./SearchForm";
 
 function CompaniesList() {
   const [companiesData, setCompaniesData] =
-  useState({ data: null, isLoading: true });
+    useState({ data: null, isLoading: true });
 
   console.log("CompaniesList, state:", companiesData);
 
@@ -27,23 +27,26 @@ function CompaniesList() {
 
   useEffect(function fetchAndSetCompaniesData() {
     async function getCompanies() {
-      let companiesResults = await JoblyApi.getAllCompanies();
+      const companiesResults = await JoblyApi.getAllCompanies();
 
-      setCompaniesData({
-        data: companiesResults,
-        isLoading: false
+      setCompaniesData(() => {
+        return {
+          data: companiesResults,
+          isLoading: false
+        };
       });
     }
     getCompanies();
   }, []);
 
-  async function filterCompanies(searchQuery){
+  async function filterCompanies(searchQuery) {
     const companiesResults = await JoblyApi.getFilteredCompanies(searchQuery);
     setCompaniesData(() => {
       return {
-      data: companiesResults,
-      isLoading:false
-    }});
+        data: companiesResults,
+        isLoading: false
+      };
+    });
 
   }
 
@@ -51,14 +54,14 @@ function CompaniesList() {
 
   return (
     <div className="CompaniesList">
-      <SearchForm filterCompanies={filterCompanies}/>
-      {companiesData.data.map((company)=>{
-        return(
+      <SearchForm searchFunction={filterCompanies} />
+      {companiesData.data.map((company) => {
+        return (
           <CompanyCard
-            name = {company.name}
-            description = {company.description}
-            logoUrl = {company.logoUrl}
-            handle = {company.handle}
+            name={company.name}
+            description={company.description}
+            logoUrl={company.logoUrl}
+            handle={company.handle}
           />
         );
       })}

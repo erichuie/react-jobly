@@ -54,19 +54,33 @@ class JoblyApi {
 
   /** Get all companies */
 
-  static async getAllCompanies(){
+  static async getAllCompanies() {
     const companiesData = await this.request(`companies/`);
     return companiesData.companies;
   }
 
   /**Filter companies */
-  static async getFilteredCompanies(searchName){
+  static async getFilteredCompanies(searchName) {
     const filteredCompaniesData =
-      await this.request(`companies/`, {"nameLike": searchName});
+      await this.request(`companies/`, { "nameLike": searchName });
     return filteredCompaniesData.companies;
   }
 
-  // obviously, you'll add a lot here ...
+  /** Get all jobs */
+
+  static async getAllJobs() {
+    const jobsData = await this.request(`jobs/`);
+    return jobsData.jobs;
+  }
+
+  /**Filter jobs */
+
+  static async getFilteredJobs(searchName) {
+    const filteredJobsData =
+      await this.request(`jobs/`, { "title": searchName });
+    return filteredJobsData.jobs;
+  }
+
 }
 
 export default JoblyApi;

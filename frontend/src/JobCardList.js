@@ -1,3 +1,5 @@
+import JobCard from "./JobCard";
+
 /** Renders separate cards for each job this needs to display
  *
  * Props:
@@ -10,15 +12,15 @@
 */
 
 
-function JobCardList({ jobData }){
+function JobCardList({ jobsData }) {
 
-  console.log("JobCardList", jobData)
+  console.log("JobCardList", jobsData);
 
   return (
     <div className="JobCardList">
-
+      {jobsData.map(job => <JobCard job={job} />)}
     </div>
-  )
+  );
 }
 
 export default JobCardList;

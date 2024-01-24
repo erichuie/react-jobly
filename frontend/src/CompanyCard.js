@@ -14,10 +14,9 @@ import { Link } from "react-router-dom";
  * CompaniesList -> CompanyCard
  */
 
-function CompanyCard({ name, description, logoUrl, handle }){
-  return(
+function CompanyCard({ name, description, logoUrl, handle }) {
+  return (
     <Link to={`/companies/${handle}`} className="CompanyCard">
-      <link rel="stylesheet" href="" />
       <h3>{name}</h3>
       <img src={logoUrl} />
       <p>{description}</p>

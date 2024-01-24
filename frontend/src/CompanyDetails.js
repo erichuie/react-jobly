@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "./api";
-import JobsList from "./JobsList";
 import JobCardList from "./JobCardList";
 
 /**Fetches data and jobs for one company and renders it
@@ -29,9 +28,11 @@ function CompanyDetails() {
     async function getCompany() {
       let companyResults = await JoblyApi.getCompany(handle);
 
-      setCompanyData({
-        data: companyResults,
-        isLoading: false
+      setCompanyData(() => {
+        return {
+          data: companyResults,
+          isLoading: false
+        };
       });
     }
     getCompany();
@@ -40,13 +41,13 @@ function CompanyDetails() {
   if (companyData.isLoading) return <i>...R2D2 noises ...</i>;
 
 
-  return(
+  return (
     <div className="CompanyDetails">
-      <h1> companyData.name</h1>
-      <p> companyData.description </p>
-      <JobCardList jobData={companyData.jobs} />
+      <h1> {companyData.data.name}</h1>
+      <p> {companyData.data.description} </p>
+      <JobCardList jobsData={companyData.data.jobs} />
     </div>
-  )
+  );
 
 }
 
