@@ -27,12 +27,10 @@ function CompaniesList() {
 
   useEffect(function fetchAndSetCompaniesData() {
     async function getCompanies() {
-      let companyResults = await JoblyApi.getAllCompanies();
-
-      console.log("CompaniesList, useEffect results:", companyResults);
+      let companiesResults = await JoblyApi.getAllCompanies();
 
       setCompaniesData({
-        data: companyResults,
+        data: companiesResults,
         isLoading: false
       });
     }
@@ -40,12 +38,10 @@ function CompaniesList() {
   }, []);
 
   async function filterCompanies(searchQuery){
-    console.log("searchQuery", searchQuery)
-    const companyResults = await JoblyApi.getFilteredCompanies(searchQuery);
-    console.log("test this works companyResults", companyResults);
+    const companiesResults = await JoblyApi.getFilteredCompanies(searchQuery);
     setCompaniesData(() => {
       return {
-      data: companyResults,
+      data: companiesResults,
       isLoading:false
     }});
 
@@ -62,6 +58,7 @@ function CompaniesList() {
             name = {company.name}
             description = {company.description}
             logoUrl = {company.logoUrl}
+            handle = {company.handle}
           />
         );
       })}

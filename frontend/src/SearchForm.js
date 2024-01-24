@@ -1,8 +1,21 @@
 import { useState } from "react";
 
+/**
+ * SearchForm - Get user search query and make api request
+ *
+ * Props:
+ *  None
+ *
+ * State:
+ *  formData (searchQuery)
+ *
+ * RoutesList -> CompaniesList, JobsList -> SearchForm
+*/
+
 function SearchForm({ filterCompanies }){
+  console.log("SearchForm", filterCompanies);
+
   const [formData, setFormData] = useState("");
-  // console.log("formData", formData);
 
   function handleChange(evt){
     const input = evt.target;
@@ -13,7 +26,6 @@ function SearchForm({ filterCompanies }){
 
   function handleSubmit(evt){
     evt.preventDefault();
-    // console.log("what is seachName", formData.searchQuery);
     filterCompanies(formData.searchQuery);
     setFormData("");
   }

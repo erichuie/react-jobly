@@ -62,7 +62,7 @@ class JoblyApi {
   /**Filter companies */
   static async getFilteredCompanies(searchName){
     const filteredCompaniesData =
-      await this.request(`companies/`, {"nameLike": "Baker-Santos"});
+      await this.request(`companies/`, {"nameLike": searchName});
     return filteredCompaniesData.companies;
   }
 
