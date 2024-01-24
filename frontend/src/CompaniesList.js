@@ -8,7 +8,8 @@
  * State:
  *  companiesData - fetched data in the form {...}
  *
- */
+ * RoutesList -> CompaniesList -> SearchForm, CompanyCard
+*/
 
 function CompaniesList(){
   console.log("CompaniesList");

@@ -1,11 +1,31 @@
 import { NavLink } from "react-router-dom";
 
-function Navigation(){
+/**Displays Navbar to other routes
+ *
+ * Prop:
+ * -None
+ *
+ * State:
+ * -None
+ *
+ * App -> Navigation
+ */
+
+function Navigation() {
   console.log("Navigation");
-  return(
-    <NavLink to={"/"}>
-      Jobly
-    </NavLink>
-  )
+  return (
+    <div>
+      <NavLink to={"/"}>
+        Jobly
+      </NavLink>
+      <NavLink to={"/companies"}>
+        Companies
+      </NavLink>
+      <NavLink to={"/jobs"}>
+        Jobs
+      </NavLink>
+    </div>
+
+  );
 }
 export default Navigation;

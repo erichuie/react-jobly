@@ -1,5 +1,14 @@
 
-/**Renders homepage of application */
+/**Renders homepage of application
+ *
+ * Props:
+ * -None
+ *
+ * State:
+ * -jobsData: array of job objects
+ *
+ * App -> Homepage
+*/
 
 function Homepage(){
   console.log("Homepage");
