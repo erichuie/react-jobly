@@ -33,12 +33,10 @@ function RoutesList({ login, signup }) {
 
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
-        {console.log("whatever")}
         <Route path="/companies" element={<CompaniesList />}></Route>
         <Route path="/companies/:handle" element={<CompanyDetails />}></Route>
         <Route path="/jobs" element={<JobsList />}></Route>
         <Route path="/profile" element={<ProfileForm />}></Route>
-        <Route path="/login" element={<LoginForm login={login}/>}></Route>
         <Route path="*" element={<Homepage />}></Route>
       </Routes>
     );

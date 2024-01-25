@@ -26,7 +26,7 @@ function Homepage() {
       { user &&
       <div>
         <h1>Jobly</h1>
-        <p>Hi, {user.name}</p>
+        <p>Hi, {user.username}</p>
       </div>
       }
     </div>

@@ -113,6 +113,8 @@ class JoblyApi {
     const loginData = await this.request("auth/token/",
       { username, password },
       "POST");
+      this.token = loginData.token;
+      console.log("API > Login >> this.token", this.token);
     return loginData.token;
   }
 
@@ -129,9 +131,23 @@ class JoblyApi {
         email: email
       },
       "POST");
+    this.token = responseData.token;
     return responseData.token;
   }
 
+  /** Get data for authenticated user
+   *
+   *  Takes a username and returns user data for validated user:
+   *
+   * { firstName, lastName, email, isAdmin, jobs}
+  */
+
+  static async getUserData(username){
+    console.log("API > getUserData >> this.token", this.token);
+    const responseData = await this.request(`users/${username}`);
+
+    return responseData.user;
+  }
 }
 
 export default JoblyApi;
