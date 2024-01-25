@@ -3,6 +3,11 @@ import JoblyApi from "./api";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 
+/////////////////FIXME: REMOVE ME
+import { useContext } from "react";
+import userContext  from "./userContext"
+
+
 /**
  * CompaniesList - get all companies from API and show company data
  *
@@ -17,6 +22,11 @@ import SearchForm from "./SearchForm";
 */
 
 function CompaniesList() {
+  //FIXME: TEMP
+  const { user } = useContext(userContext);
+  console.log("CompaniesList user:", user);
+  //
+
   const [companiesData, setCompaniesData] =
     useState({ data: null, isLoading: true });
 

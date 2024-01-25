@@ -27,8 +27,9 @@ function LoginForm({ login }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
+
     login(formData);
-    navigate("/");
+    //navigate("/");TODO: whyyyyy are we still going to the homepage on submit!?
   }
 
   return (

@@ -116,6 +116,22 @@ class JoblyApi {
     return loginData.token;
   }
 
+  /**Register a user
+   * user must include { username, password, firstName, lastName, email }
+  */
+  static async register(username, password, firstName, lastName, email) {
+    const responseData = await this.request("auth/register/",
+      {
+        username: username,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        email: email
+      },
+      "POST");
+    return responseData.token;
+  }
+
 }
 
 export default JoblyApi;

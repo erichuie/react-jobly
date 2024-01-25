@@ -22,14 +22,13 @@ import userContext  from "./userContext"
  * App -> RoutesList -> Homepage, CompaniesList, CompanyDetails, JobsList...
  */
 
-function RoutesList({ login }) {
-  console.log("RoutesList");
-
-  // userContext here?
+function RoutesList({ login, signup }) {
   const { user } = useContext(userContext);
-  console.log("routes list user", user);
+
+  console.log("RoutesList user:", user);
 
   if(user){
+    console.log("Router - user routes reached:", user);
     return (
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
@@ -37,15 +36,17 @@ function RoutesList({ login }) {
         <Route path="/companies/:handle" element={<CompanyDetails />}></Route>
         <Route path="/jobs" element={<JobsList />}></Route>
         <Route path="/profile" element={<ProfileForm />}></Route>
+        <Route path="/login" element={<LoginForm login={login}/>}></Route>
         <Route path="*" element={<Homepage />}></Route>
       </Routes>
     );
   }
   else{
+    console.log("Router - no user routes:", user);
     return (
       <Routes>
         <Route path="/login" element={<LoginForm login={login}/>}></Route>
-        <Route path="/signup" element={<SignupForm />}></Route>
+        <Route path="/signup" element={<SignupForm signup={signup} />}></Route>
         <Route path="*" element={<Homepage />}></Route>
       </Routes>
     );

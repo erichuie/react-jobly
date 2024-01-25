@@ -10,13 +10,21 @@ import JoblyApi from './api';
 /**Renders RoutesList and Navigation components */
 
 function App() {
-  const [user, setUser] = useState(
-    null
-  );
-  console.log("user status", user);
+  const [user, setUser] = useState(null);
+  console.log("App user status", user);
 
   async function login({username, password}) {
     const tokenFromAPI = await JoblyApi.login(username, password);
+    setUser({
+      name:username,
+      token:tokenFromAPI
+    });
+  }
+
+  async function signup({username, password, firstName, lastName, email }) {
+    const tokenFromAPI =
+      await JoblyApi.register(username, password, firstName, lastName, email );
+
     setUser({
       name:username,
       token:tokenFromAPI
@@ -28,7 +36,7 @@ function App() {
       <userContext.Provider value={{user}}>
         <BrowserRouter>
           <Navigation />
-          <RoutesList login={login}/>
+          <RoutesList login={login} signup={signup}/>
         </BrowserRouter>
       </userContext.Provider>
     </div>
