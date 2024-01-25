@@ -59,9 +59,9 @@ class JoblyApi {
   //   const companiesData = await this.request(`companies/`);
   //   return companiesData.companies;
   // }
-  static async getAllCompanies(searchName="") {
+  static async getAllCompanies(searchName = "") {
 
-    if (searchName){
+    if (searchName) {
       const filteredCompaniesData =
         await this.request(`companies/`, { "nameLike": searchName });
       return filteredCompaniesData.companies;
@@ -86,10 +86,10 @@ class JoblyApi {
   //   return jobsData.jobs;
   // }
 
-  static async getAllJobs(searchName="") {
+  static async getAllJobs(searchName = "") {
     console.log("getAllJobs, q:", searchName);
 
-    if (searchName){
+    if (searchName) {
       const filteredJobsData =
         await this.request(`jobs/`, { "title": searchName });
 
@@ -107,6 +107,14 @@ class JoblyApi {
   //     await this.request(`jobs/`, { "title": searchName });
   //   return filteredJobsData.jobs;
   // }
+
+  /**Login */
+  static async login(username, password) {
+    const loginData = await this.request("auth/token/",
+      { username, password },
+      "POST");
+    return loginData.token;
+  }
 
 }
 
