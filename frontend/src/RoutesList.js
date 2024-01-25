@@ -23,6 +23,8 @@ function RoutesList() {
       <Route path="/companies" element={<CompaniesList />}></Route>
       <Route path="/companies/:handle" element={<CompanyDetails />}></Route>
       <Route path="/jobs" element={<JobsList />}></Route>
+
+      <Route path="*" element={<Homepage />}></Route>
     </Routes>
   );
 }

@@ -13,9 +13,10 @@ import { useState } from "react";
 */
 
 function SearchForm({ searchFunction }) {
-  console.log("SearchForm", searchFunction);
 
   const [formData, setFormData] = useState("");
+
+  console.log("SearchForm", formData);
 
   function handleChange(evt) {
     const input = evt.target;
@@ -35,8 +36,9 @@ function SearchForm({ searchFunction }) {
       <form onSubmit={handleSubmit}>
         <input
           name="searchQuery"
-          value={formData.searchQuery}
-          onChange={handleChange}>
+          value={formData ? formData.searchQuery : ""}
+          onChange={handleChange}
+          required>
         </input>
         <button>Submit</button>
       </form>

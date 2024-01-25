@@ -40,7 +40,7 @@ function CompaniesList() {
   }, []);
 
   async function filterCompanies(searchQuery) {
-    const companiesResults = await JoblyApi.getFilteredCompanies(searchQuery);
+    const companiesResults = await JoblyApi.getAllCompanies(searchQuery);
     setCompaniesData(() => {
       return {
         data: companiesResults,
@@ -56,16 +56,25 @@ function CompaniesList() {
   return (
     <div className="CompaniesList">
       <SearchForm searchFunction={filterCompanies} />
-      {companiesData.data.map((company) => {
-        return (
-          <CompanyCard//addkey here
-            name={company.name}
-            description={company.description}
-            logoUrl={company.logoUrl}
-            handle={company.handle}
-          />
-        );
-      })}
+
+      { companiesData.data.length !== 0  &&
+
+        companiesData.data.map((company) => {
+          return (
+            <CompanyCard
+              key={company.handle}
+              name={company.name}
+              description={company.description}
+              logoUrl={company.logoUrl}
+              handle={company.handle}
+            />
+          );
+        })
+      }
+
+      { companiesData.data.length === 0 &&
+        "No Results"
+      }
     </div>
   );
 }

@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import JoblyApi from "./api";
 import JobCardList from "./JobCardList";
 
@@ -17,6 +17,7 @@ import JobCardList from "./JobCardList";
 
 function CompanyDetails() {
 
+  const navigate = useNavigate();
   const { handle } = useParams();
 
   const [companyData, setCompanyData]
@@ -27,14 +28,19 @@ function CompanyDetails() {
   useEffect(function fetchAndSetCompanyData() {
     console.log("test use effect ran");
     async function getCompany() {
-      let companyResults = await JoblyApi.getCompany(handle);
+      try{
+        let companyResults = await JoblyApi.getCompany(handle);
 
-      setCompanyData(() => {
-        return {
-          data: companyResults,
-          isLoading: false
-        };
-      });
+        setCompanyData(() => {
+          return {
+            data: companyResults,
+            isLoading: false
+          };
+        });
+      }catch(err){
+        console.log("OMGAAAA");
+        navigate("/");
+      }
     }
     getCompany();
   }, [handle]); //need to add handle here so that useEffect will run and

@@ -35,7 +35,7 @@ function JobsList() {
   }, []);
 
   async function filterJobs(searchQuery) {
-    const jobsResults = await JoblyApi.getFilteredJobs(searchQuery);
+    const jobsResults = await JoblyApi.getAllJobs(searchQuery);
     setJobsData(() => {
       return {
         data: jobsResults,
@@ -48,8 +48,14 @@ function JobsList() {
 
   return (
     <div className="JobsList">
-      <SearchForm searchFunction={filterJobs} />
-      <JobCardList jobsData={jobsData.data} />
+        <SearchForm searchFunction={filterJobs} />
+
+      { jobsData.data.length !== 0 &&
+        <JobCardList jobsData={jobsData.data} />
+      }
+      { jobsData.data.length === 0 &&
+        "No Results"
+      }
     </div>
   );
 }

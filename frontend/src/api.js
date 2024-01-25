@@ -55,33 +55,58 @@ class JoblyApi {
   //could possibly combine getAll and getFiltered
   /** Get all companies */
 
-  static async getAllCompanies() {
+  // static async getAllCompanies() {
+  //   const companiesData = await this.request(`companies/`);
+  //   return companiesData.companies;
+  // }
+  static async getAllCompanies(searchName="") {
+
+    if (searchName){
+      const filteredCompaniesData =
+        await this.request(`companies/`, { "nameLike": searchName });
+      return filteredCompaniesData.companies;
+    }
+
     const companiesData = await this.request(`companies/`);
     return companiesData.companies;
   }
 
   /**Filter companies */
-  static async getFilteredCompanies(searchName) {
-    const filteredCompaniesData =
-      await this.request(`companies/`, { "nameLike": searchName });
-    return filteredCompaniesData.companies;
-  }
+  // static async getFilteredCompanies(searchName) {
+  //   const filteredCompaniesData =
+  //     await this.request(`companies/`, { "nameLike": searchName });
+  //   return filteredCompaniesData.companies;
+  // }
 
   //could possibly combine getAll and getFiltered
   /** Get all jobs */
 
-  static async getAllJobs() {
+  // static async getAllJobs() {
+  //   const jobsData = await this.request(`jobs/`);
+  //   return jobsData.jobs;
+  // }
+
+  static async getAllJobs(searchName="") {
+    console.log("getAllJobs, q:", searchName);
+
+    if (searchName){
+      const filteredJobsData =
+        await this.request(`jobs/`, { "title": searchName });
+
+      return filteredJobsData.jobs;
+    }
+
     const jobsData = await this.request(`jobs/`);
     return jobsData.jobs;
   }
 
   /**Filter jobs */
 
-  static async getFilteredJobs(searchName) {
-    const filteredJobsData =
-      await this.request(`jobs/`, { "title": searchName });
-    return filteredJobsData.jobs;
-  }
+  // static async getFilteredJobs(searchName) {
+  //   const filteredJobsData =
+  //     await this.request(`jobs/`, { "title": searchName });
+  //   return filteredJobsData.jobs;
+  // }
 
 }
 

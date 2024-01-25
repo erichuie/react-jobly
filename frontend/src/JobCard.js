@@ -16,8 +16,8 @@ function JobCard({ job }) {
   return (
     <div className="JobCard">
       <h3>{job.title}</h3>
-      <p>{job.salary}</p>
-      <p>{job.equity}</p>
+      <p>Salary: {job.salary ? job.salary : "Salary not available."}</p>
+      <p>Equity: {job.equity ? job.equity : "Equity not available."}</p>
     </div>
   );
 }
