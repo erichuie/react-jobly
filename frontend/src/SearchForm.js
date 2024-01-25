@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 /**
  * SearchForm - Get user search query and make api request
@@ -31,18 +33,36 @@ function SearchForm({ searchFunction }) {
     setFormData("");
   }
 
+  // return (
+  //   <div>
+  //     <form onSubmit={handleSubmit}>
+  //       <input
+  //         name="searchQuery"
+  //         value={formData ? formData.searchQuery : ""}
+  //         onChange={handleChange}
+  //         required>
+  //       </input>
+  //       <button>Submit</button>
+  //     </form>
+  //   </div>
+  // );
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          name="searchQuery"
-          value={formData ? formData.searchQuery : ""}
-          onChange={handleChange}
-          required>
-        </input>
-        <button>Submit</button>
-      </form>
-    </div>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Search bar</Form.Label>
+          <Form.Control
+            type="input"
+            placeholder="Enter email"
+            name="searchQuery"
+            value={formData ? formData.searchQuery : ""}
+            onChange={handleChange}
+            required />
+        </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+      </Form>
   );
 }
 
