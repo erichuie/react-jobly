@@ -5,6 +5,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Stack from 'react-bootstrap/Stack';
 
+import { useContext } from "react";
+import userContext  from "./userContext"
+
 /**Displays Navbar to other routes
  *
  * Prop:
@@ -17,25 +20,28 @@ import Stack from 'react-bootstrap/Stack';
  */
 
 function Navigation() {
-  console.log("Navigation");
+  const { user } = useContext(userContext);
+  console.log("Navigation user:", user);
+
+
   return (
     <div className="Navigation">
-      <NavLink className="Navigation-link" to={"/"}>
+      <NavLink className="Navigation-link" to="/">
         Jobly
       </NavLink>
-      <NavLink className="Navigation-link" to={"/companies"}>
+      <NavLink className="Navigation-link" to="/companies">
         Companies
       </NavLink>
-      <NavLink className="Navigation-link" to={"/jobs"}>
+      <NavLink className="Navigation-link" to="/jobs">
         Jobs
       </NavLink>
-      <NavLink className="Navigation-link" to={"/profile"}>
+      <NavLink className="Navigation-link" to="/profile">
         Profile
       </NavLink>
-      <NavLink className="Navigation-link" to={"/login"}>
+      <NavLink className="Navigation-link" to="/login">
         Login
       </NavLink>
-      <NavLink className="Navigation-link" to={"/signup"}>
+      <NavLink className="Navigation-link" to="/signup">
         Signup
       </NavLink>
     </div>

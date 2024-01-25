@@ -30,8 +30,10 @@ function RoutesList({ login, signup }) {
   if(user){
     console.log("Router - user routes reached:", user);
     return (
+
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
+        {console.log("whatever")}
         <Route path="/companies" element={<CompaniesList />}></Route>
         <Route path="/companies/:handle" element={<CompanyDetails />}></Route>
         <Route path="/jobs" element={<JobsList />}></Route>
