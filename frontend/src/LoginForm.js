@@ -10,9 +10,9 @@ import { useState } from "react";
  */
 
 function LoginForm({ login }) {
-  const [formData, setFormData] = useState("");
+  const [formData, setFormData] = useState({username:"", password:""});
   console.log("formData", formData);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
 
   function handleChange(evt) {
     const input = evt.target;
@@ -42,20 +42,22 @@ function LoginForm({ login }) {
         <input
           name="username"
           onChange={handleChange}
-          value={formData.username}>
+          value={formData?.username}
+          placeholder="username">
         </input>
 
         <input
           type="password"
           name="password"
           onChange={handleChange}
-          value={formData.password}>
+          value={formData?.password}
+          placeholder="password">
         </input>
         <button>Login</button>
       </form>
       {/* //map over err to display individual errors */}
       { errorMessage &&
-      <p>{errorMessage}</p>}
+      <p>{'noooooooooooo'}</p>}
     </div>
   );
 }

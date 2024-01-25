@@ -23,12 +23,12 @@ import userContext from "./userContext";
  */
 
 function RoutesList({ login, signup }) {
-  const { user } = useContext(userContext);
+  const { user, token } = useContext(userContext);
 
   console.log("RoutesList user:", user);
 
   //use a navigate component to send to homepage upon calling path that doesnt exist to user or not logged in user
-  if (user) {
+  if (user && token) {
     console.log("Router - user routes reached:", user);
     return (
 

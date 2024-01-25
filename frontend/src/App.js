@@ -7,13 +7,28 @@ import Navigation from './Navigation';
 import userContext from './userContext';
 import JoblyApi from './api';
 
+
 //add more to docstring
 /**Renders RoutesList and Navigation components */
 
 function App() {
-  const [user, setUser] = useState(null);
+
+  const [user, setUser] = useState(localStorage.getItem('user'));
+  const [ token, setToken] = useState(localStorage.getItem('token'));
 
   console.log("App user status", user);
+
+  /** thinking about localStorage stuff */
+
+  // useEffect(function fetchTokenFromLocalStorage(){
+
+  //   function getToken(){
+  //     setToken(localStorage.getItem('token'));
+  //   }
+
+  //   getToken();
+  // }, [])
+
 
   /** AUTH  ********************************************************************/
 
@@ -23,6 +38,8 @@ function App() {
     const tokenFromAPI = await JoblyApi.login(username, password);
     console.log("App login >> token", tokenFromAPI);
 
+    setToken(tokenFromAPI);
+    localStorage.setItem('token', tokenFromAPI);
     getUserData(username);
   }
 
@@ -30,12 +47,16 @@ function App() {
   async function signup({ username, password, firstName, lastName, email }) {
     const tokenFromAPI =
       await JoblyApi.register(username, password, firstName, lastName, email);
-    getUserData(username);
+
+      setToken(tokenFromAPI);
+      getUserData(username);
   }
 
-  /** Sets user state to null */
+  /** Sets user state to null and removes token from localStorage */
   function logout() {
     setUser(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 
   /**
@@ -48,7 +69,7 @@ function App() {
       await JoblyApi.getUserData(username);
 
     console.log("App >> getUserData, email", email);
-
+    localStorage.setItem('user',username);
     setUser(() => {
       return {
         username,
@@ -63,7 +84,7 @@ function App() {
 
   return (
     <div className="App">
-      <userContext.Provider value={{ user }}>
+      <userContext.Provider value={{ user, token }}>
         <BrowserRouter>
           <Navigation logout={logout} />
           <RoutesList login={login} signup={signup} />
