@@ -18,18 +18,6 @@ function App() {
 
   console.log("App user status", user);
 
-  /** thinking about localStorage stuff */
-
-  // useEffect(function fetchTokenFromLocalStorage(){
-
-  //   function getToken(){
-  //     setToken(localStorage.getItem('token'));
-  //   }
-
-  //   getToken();
-  // }, [])
-
-
   /** AUTH  ********************************************************************/
 
   /** Calls api for login and sets state of user*/
