@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import RoutesList from './RoutesList';
 import Navigation from './Navigation';
@@ -13,30 +13,56 @@ function App() {
   const [user, setUser] = useState(null);
   console.log("App user status", user);
 
-  async function login({username, password}) {
+  /** Calls api for login and sets state of user*/
+  async function login({ username, password }) {
     const tokenFromAPI = await JoblyApi.login(username, password);
+    JoblyApi.token = tokenFromAPI;
     setUser({
-      name:username,
-      token:tokenFromAPI
+      name: username,
+      token: tokenFromAPI
     });
   }
 
-  async function signup({username, password, firstName, lastName, email }) {
-    const tokenFromAPI =
-      await JoblyApi.register(username, password, firstName, lastName, email );
+  // useEffect(function fetchAndSetUserData() {
+  //   async function getUserData() {
+  //     const { firstName, lastName, email, isAdmin, jobs} =
+  //     await JoblyApi.getUserData(user.username);
+  //     setUser(() => {
+  //       return {
+  //         ...user,
+  //         firstName,
+  //         lastName,
+  //         email,
+  //         isAdmin,
+  //         jobs
+  //       };
+  //     });
+  //   }
+  //   getUserData();
+  // }, [user.token]);
 
+  /** Calls api for registering a user and sets state of user*/
+  async function signup({ username, password, firstName, lastName, email }) {
+    const tokenFromAPI =
+      await JoblyApi.register(username, password, firstName, lastName, email);
+    JoblyApi.token = tokenFromAPI;
     setUser({
-      name:username,
-      token:tokenFromAPI
+      name: username,
+      token: tokenFromAPI
     });
+  }
+
+  /** Sets user state to null */
+  function logout() {
+    setUser(null);
   }
 
   return (
     <div className="App">
-      <userContext.Provider value={{user}}>
+      <userContext.Provider value={{ user }}>
         <BrowserRouter>
-          <Navigation />
-          <RoutesList login={login} signup={signup}/>
+          <Navigation logout={logout} />
+          <RoutesList login={login} signup={signup} />
         </BrowserRouter>
       </userContext.Provider>
     </div>

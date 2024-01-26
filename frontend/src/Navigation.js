@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Stack from 'react-bootstrap/Stack';
 
 import { useContext } from "react";
-import userContext  from "./userContext"
+import userContext from "./userContext";
 
 /**Displays Navbar to other routes
  *
@@ -19,31 +19,49 @@ import userContext  from "./userContext"
  * App -> Navigation
  */
 
-function Navigation() {
+function Navigation({ logout }) {
   const { user } = useContext(userContext);
   console.log("Navigation user:", user);
 
-
+  //why is onclick logout working when don't make separate function to invoke it
   return (
     <div className="Navigation">
-      <NavLink className="Navigation-link" to="/">
-        Jobly
-      </NavLink>
-      <NavLink className="Navigation-link" to="/companies">
-        Companies
-      </NavLink>
-      <NavLink className="Navigation-link" to="/jobs">
-        Jobs
-      </NavLink>
-      <NavLink className="Navigation-link" to="/profile">
-        Profile
-      </NavLink>
-      <NavLink className="Navigation-link" to="/login">
-        Login
-      </NavLink>
-      <NavLink className="Navigation-link" to="/signup">
-        Signup
-      </NavLink>
+      {user &&
+        <div>
+          <NavLink className="Navigation-link" to="/">
+            Jobly
+          </NavLink>
+          <NavLink className="Navigation-link" to="/companies">
+            Companies
+          </NavLink>
+          <NavLink className="Navigation-link" to="/jobs">
+            Jobs
+          </NavLink>
+          <NavLink className="Navigation-link" to="/profile">
+            Profile
+          </NavLink>
+          <NavLink className="Navigation-link" onClick={logout} to="/">
+            Logout {user.name}
+          </NavLink>
+        </div>
+      }
+
+      {!user &&
+        <div>
+          <NavLink className="Navigation-link" to="/">
+            Jobly
+          </NavLink>
+          <NavLink className="Navigation-link" to="/login">
+            Login
+          </NavLink>
+          <NavLink className="Navigation-link" to="/signup">
+            Signup
+          </NavLink>
+        </div>
+      }
+
+
+
     </div>
 
   );

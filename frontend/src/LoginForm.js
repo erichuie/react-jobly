@@ -29,7 +29,7 @@ function LoginForm({ login }) {
     evt.preventDefault();
 
     login(formData);
-    //navigate("/");TODO: whyyyyy are we still going to the homepage on submit!?
+    navigate("/");
   }
 
   return (

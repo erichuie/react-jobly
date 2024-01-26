@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import userContext from "./userContext";
 
 /**Renders homepage of application
  *
@@ -11,11 +13,22 @@
 */
 
 function Homepage() {
+  const { user } = useContext(userContext);
   console.log("Homepage");
   return (
     <div>
-      <h1>Jobly</h1>
-      <p>All the jobs in one, convenient place</p>
+      { !user &&
+      <div>
+        <h1>Jobly</h1>
+        <p>All the jobs in one, convenient place</p>
+      </div>
+      }
+      { user &&
+      <div>
+        <h1>Jobly</h1>
+        <p>Hi, {user.name}</p>
+      </div>
+      }
     </div>
   );
 }

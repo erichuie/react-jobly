@@ -32,8 +32,9 @@ function CompaniesList() {
 
   console.log("CompaniesList, state:", companiesData);
 
-  //this page renders and we want to grab all the companies as soon as we can
-  // use effect to make api request to get the companies
+  /**Calls api for getting array of all companies
+   * and sets state of companiesData
+   */
 
   useEffect(function fetchAndSetCompaniesData() {
     async function getCompanies() {
@@ -46,8 +47,13 @@ function CompaniesList() {
         };
       });
     }
+    console.log("jobly token", JoblyApi.token);
     getCompanies();
   }, []);
+
+  /**Calls api for getting array of filtered companies based on some search
+   * parameters and sets state of companiesData
+   */
 
   async function filterCompanies(searchQuery) {
     const companiesResults = await JoblyApi.getAllCompanies(searchQuery);

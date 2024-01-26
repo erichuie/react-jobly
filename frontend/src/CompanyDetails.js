@@ -25,6 +25,10 @@ function CompanyDetails() {
 
   console.log("CompanyDetails", companyData);
 
+  /**Calls api for getting array of information about a specific company
+   * and sets state of companiesData
+   */
+
   useEffect(function fetchAndSetCompanyData() {
     console.log("test use effect ran");
     async function getCompany() {
