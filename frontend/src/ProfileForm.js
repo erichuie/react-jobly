@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import userContext  from "./userContext"
+import userContext from "./userContext";
 
-function ProfileForm(){
+function ProfileForm() {
   const { user } = useContext(userContext);
   console.log("ProfileForm user:", user);
 
-  return ("profile page")
+  return ("profile page");
 }
 
 export default ProfileForm;

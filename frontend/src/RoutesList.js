@@ -7,10 +7,10 @@ import LoginForm from "./LoginForm";
 import ProfileForm from "./ProfileForm";
 import SignupForm from "./SignupForm";
 
-//MAYBE HERE?TODO:
 import { useContext } from "react";
-import userContext  from "./userContext"
+import userContext from "./userContext";
 
+//add that using context in docstring and have props now
 /**Handles routing for application
  *
  * Prop:
@@ -27,7 +27,8 @@ function RoutesList({ login, signup }) {
 
   console.log("RoutesList user:", user);
 
-  if(user){
+  //use a navigate component to send to homepage upon calling path that doesnt exist to user or not logged in user
+  if (user) {
     console.log("Router - user routes reached:", user);
     return (
 
@@ -41,32 +42,16 @@ function RoutesList({ login, signup }) {
       </Routes>
     );
   }
-  else{
+  else {
     console.log("Router - no user routes:", user);
     return (
       <Routes>
-        <Route path="/login" element={<LoginForm login={login}/>}></Route>
+        <Route path="/login" element={<LoginForm login={login} />}></Route>
         <Route path="/signup" element={<SignupForm signup={signup} />}></Route>
         <Route path="*" element={<Homepage />}></Route>
       </Routes>
     );
   }
-
-  // return (
-  //   <Routes>
-  //     <Route path="/" element={<Homepage />}></Route>
-  //     <Route path="/companies" element={<CompaniesList />}></Route>
-  //     <Route path="/companies/:handle" element={<CompanyDetails />}></Route>
-  //     <Route path="/jobs" element={<JobsList />}></Route>
-
-  //     {"** USER ROUTES **"}
-  //     <Route path="/login" element={<LoginForm />}></Route>
-  //     <Route path="/signup" element={<SignupForm />}></Route>
-  //     <Route path="/profile" element={<ProfileForm />}></Route>
-
-  //     <Route path="*" element={<Homepage />}></Route>
-  //   </Routes>
-  // );
 }
 
 export default RoutesList;

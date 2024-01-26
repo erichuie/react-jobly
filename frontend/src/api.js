@@ -12,9 +12,7 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
-  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  static token;
 
   static async request(endpoint, data = {}, method = "GET") {
     const url = new URL(`${BASE_URL}/${endpoint}`);
@@ -52,13 +50,8 @@ class JoblyApi {
     return res.company;
   }
 
-  //could possibly combine getAll and getFiltered
   /** Get all companies */
 
-  // static async getAllCompanies() {
-  //   const companiesData = await this.request(`companies/`);
-  //   return companiesData.companies;
-  // }
   static async getAllCompanies(searchName = "") {
 
     if (searchName) {
@@ -71,20 +64,7 @@ class JoblyApi {
     return companiesData.companies;
   }
 
-  /**Filter companies */
-  // static async getFilteredCompanies(searchName) {
-  //   const filteredCompaniesData =
-  //     await this.request(`companies/`, { "nameLike": searchName });
-  //   return filteredCompaniesData.companies;
-  // }
-
-  //could possibly combine getAll and getFiltered
   /** Get all jobs */
-
-  // static async getAllJobs() {
-  //   const jobsData = await this.request(`jobs/`);
-  //   return jobsData.jobs;
-  // }
 
   static async getAllJobs(searchName = "") {
     console.log("getAllJobs, q:", searchName);
@@ -100,21 +80,20 @@ class JoblyApi {
     return jobsData.jobs;
   }
 
-  /**Filter jobs */
-
-  // static async getFilteredJobs(searchName) {
-  //   const filteredJobsData =
-  //     await this.request(`jobs/`, { "title": searchName });
-  //   return filteredJobsData.jobs;
-  // }
-
   /**Login */
   static async login(username, password) {
-    const loginData = await this.request("auth/token/",
-      { username, password },
-      "POST");
-      this.token = loginData.token;
-      console.log("API > Login >> this.token", this.token);
+    let loginData;
+    try {
+      loginData = await this.request("auth/token/",
+        { username, password },
+        "POST");
+    }
+    //catch specific error or pass on error by removing try catch block altogether
+    catch (err) {
+      throw new Error();
+    }
+    this.token = loginData.token;
+    console.log("API > Login >> this.token", this.token);
     return loginData.token;
   }
 
@@ -122,15 +101,22 @@ class JoblyApi {
    * user must include { username, password, firstName, lastName, email }
   */
   static async register(username, password, firstName, lastName, email) {
-    const responseData = await this.request("auth/register/",
-      {
-        username: username,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-        email: email
-      },
-      "POST");
+    let responseData;
+    try {
+      responseData = await this.request("auth/register/",
+        {
+          username: username,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          email: email
+        },
+        "POST");
+    }
+    catch (err) {
+      throw new Error("Username has already been taken");
+    }
+
     this.token = responseData.token;
     return responseData.token;
   }
@@ -142,7 +128,7 @@ class JoblyApi {
    * { firstName, lastName, email, isAdmin, jobs}
   */
 
-  static async getUserData(username){
+  static async getUserData(username) {
     console.log("API > getUserData >> this.token", this.token);
     const responseData = await this.request(`users/${username}`);
 

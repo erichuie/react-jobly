@@ -5,7 +5,7 @@ import SearchForm from "./SearchForm";
 
 /////////////////FIXME: REMOVE ME
 import { useContext } from "react";
-import userContext  from "./userContext"
+import userContext from "./userContext";
 
 
 /**
@@ -22,10 +22,8 @@ import userContext  from "./userContext"
 */
 
 function CompaniesList() {
-  //FIXME: TEMP
   const { user } = useContext(userContext);
   console.log("CompaniesList user:", user);
-  //
 
   const [companiesData, setCompaniesData] =
     useState({ data: null, isLoading: true });
@@ -73,7 +71,7 @@ function CompaniesList() {
     <div className="CompaniesList">
       <SearchForm searchFunction={filterCompanies} />
 
-      { companiesData.data.length !== 0  &&
+      {companiesData.data.length !== 0 &&
 
         companiesData.data.map((company) => {
           return (
@@ -88,7 +86,7 @@ function CompaniesList() {
         })
       }
 
-      { companiesData.data.length === 0 &&
+      {companiesData.data.length === 0 &&
         "No Results"
       }
     </div>

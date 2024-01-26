@@ -8,6 +8,7 @@ import Stack from 'react-bootstrap/Stack';
 import { useContext } from "react";
 import userContext from "./userContext";
 
+//update docstring with props
 /**Displays Navbar to other routes
  *
  * Prop:
@@ -23,7 +24,6 @@ function Navigation({ logout }) {
   const { user } = useContext(userContext);
   console.log("Navigation user:", user);
 
-  //why is onclick logout working when don't make separate function to invoke it
   return (
     <div className="Navigation">
       {user &&

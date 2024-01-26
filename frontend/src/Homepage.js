@@ -7,7 +7,7 @@ import userContext from "./userContext";
  * -None
  *
  * State:
- * -jobsData: array of job objects
+ * -None
  *
  * App -> Homepage
 */
@@ -17,17 +17,17 @@ function Homepage() {
   console.log("Homepage");
   return (
     <div>
-      { !user &&
-      <div>
-        <h1>Jobly</h1>
-        <p>All the jobs in one, convenient place</p>
-      </div>
+      {!user &&
+        <div>
+          <h1>Jobly</h1>
+          <p>All the jobs in one, convenient place</p>
+        </div>
       }
-      { user &&
-      <div>
-        <h1>Jobly</h1>
-        <p>Hi, {user.username}</p>
-      </div>
+      {user &&
+        <div>
+          <h1>Jobly</h1>
+          <p>Hi, {user.username}</p>
+        </div>
       }
     </div>
   );

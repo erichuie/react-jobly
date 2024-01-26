@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 /**Renders a form for logging into application
  *
@@ -11,9 +10,9 @@ import { useNavigate } from "react-router-dom";
  */
 
 function LoginForm({ login }) {
-  const [formData, setFormData] = useState({});
-  console.log("formData",formData);
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState("");
+  console.log("formData", formData);
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleChange(evt) {
     const input = evt.target;
@@ -25,29 +24,39 @@ function LoginForm({ login }) {
     });
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-
-    login(formData);
-    navigate("/");
+    try{
+      await login(formData);
+    }
+    catch(err){
+      //map over err to display individual errors
+      console.log("err", err);
+      setErrorMessage(err);
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="username"
-        onChange={handleChange}
-        value={formData.username}>
-      </input>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          name="username"
+          onChange={handleChange}
+          value={formData.username}>
+        </input>
 
-      <input
-        type="password"
-        name="password"
-        onChange={handleChange}
-        value={formData.password}>
-      </input>
-      <button>Login</button>
-    </form>
+        <input
+          type="password"
+          name="password"
+          onChange={handleChange}
+          value={formData.password}>
+        </input>
+        <button>Login</button>
+      </form>
+      {/* //map over err to display individual errors */}
+      { errorMessage &&
+      <p>{errorMessage}</p>}
+    </div>
   );
 }
 

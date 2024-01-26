@@ -32,7 +32,7 @@ function CompanyDetails() {
   useEffect(function fetchAndSetCompanyData() {
     console.log("test use effect ran");
     async function getCompany() {
-      try{
+      try {
         let companyResults = await JoblyApi.getCompany(handle);
 
         setCompanyData(() => {
@@ -41,8 +41,7 @@ function CompanyDetails() {
             isLoading: false
           };
         });
-      }catch(err){
-        console.log("OMGAAAA");
+      } catch (err) {
         navigate("/");
       }
     }
