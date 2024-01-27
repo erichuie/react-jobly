@@ -83,15 +83,12 @@ class JoblyApi {
   /**Login */
   static async login(username, password) {
     let loginData;
-    try {
+
       loginData = await this.request("auth/token/",
         { username, password },
         "POST");
-    }
+
     //catch specific error or pass on error by removing try catch block altogether
-    catch (err) {
-      throw new Error();
-    }
     this.token = loginData.token;
     console.log("API > Login >> this.token", this.token);
     return loginData.token;

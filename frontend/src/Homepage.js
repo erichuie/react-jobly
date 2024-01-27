@@ -2,6 +2,7 @@ import { useContext } from "react";
 import userContext from "./userContext";
 
 /**Renders homepage of application
+ * Uses global context to show user's username
  *
  * Props:
  * -None

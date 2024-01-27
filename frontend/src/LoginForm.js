@@ -7,13 +7,15 @@ import { useState } from "react";
  *
  * State:
  * -formData
+ * -errorMessage
  */
 
 function LoginForm({ login }) {
   const [formData, setFormData] = useState({username:"", password:""});
   console.log("formData", formData);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
+  /** changes formData upon input box changes*/
   function handleChange(evt) {
     const input = evt.target;
     setFormData(() => {
@@ -24,15 +26,19 @@ function LoginForm({ login }) {
     });
   }
 
+  /** invokes login function with formData upon submitting form*/
   async function handleSubmit(evt) {
     evt.preventDefault();
     try{
       await login(formData);
     }
     catch(err){
+      const test = new Error();
+      console.dir("hello");
       //map over err to display individual errors
       console.log("err", err);
-      setErrorMessage(err);
+      console.log("hello %o there %o", 42, "42");
+      setErrorMessage("Invalid username/password");
     }
   }
 
@@ -57,7 +63,7 @@ function LoginForm({ login }) {
       </form>
       {/* //map over err to display individual errors */}
       { errorMessage &&
-      <p>{'noooooooooooo'}</p>}
+      <p>{errorMessage}</p>}
     </div>
   );
 }

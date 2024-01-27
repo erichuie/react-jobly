@@ -20,6 +20,7 @@ function SearchForm({ searchFunction }) {
 
   console.log("SearchForm", formData);
 
+  /** changes formData upon input box changes*/
   function handleChange(evt) {
     const input = evt.target;
     setFormData(() => ({
@@ -27,6 +28,7 @@ function SearchForm({ searchFunction }) {
     }));
   }
 
+  /**invokes searchFunction upon form submission */
   function handleSubmit(evt) {
     evt.preventDefault();
     searchFunction(formData.searchQuery);

@@ -8,11 +8,12 @@ import Stack from 'react-bootstrap/Stack';
 import { useContext } from "react";
 import userContext from "./userContext";
 
-//update docstring with props
 /**Displays Navbar to other routes
+ * Uses context to display user's name for logout link
  *
  * Prop:
- * -None
+ * -logout: function to set state of user to null and
+ * remove items from sessionStorage
  *
  * State:
  * -None

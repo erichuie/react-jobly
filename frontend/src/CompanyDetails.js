@@ -42,7 +42,7 @@ function CompanyDetails() {
           };
         });
       } catch (err) {
-        navigate("/");
+        navigate("/companies");
       }
     }
     getCompany();

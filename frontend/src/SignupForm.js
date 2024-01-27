@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-//update docstring
 /**Renders a form for Registering a new user
  *
  * Props:
- * -login: function to set state of user to logged in
+ * -signup: function to register a new user in backend and set state of user
  *
  * State:
  * -formData
+ * -errorMessage
  */
 
 function SignupForm({ signup }) {
@@ -16,7 +16,7 @@ function SignupForm({ signup }) {
   const [errorMessage, setErrorMessage] = useState("");
   console.log("errorMessage", errorMessage);
 
-  //add docstrings
+  /** changes formData upon input box changes*/
   function handleChange(evt) {
     const input = evt.target;
     setFormData(() => {
@@ -27,6 +27,7 @@ function SignupForm({ signup }) {
     });
   }
 
+  /**invokes signup function upon form submission */
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {

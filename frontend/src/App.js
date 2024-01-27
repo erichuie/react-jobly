@@ -6,19 +6,44 @@ import Navigation from './Navigation';
 
 import userContext from './userContext';
 import JoblyApi from './api';
+// import { jwtDecode } from "jwt-decode";
 
 
-//add more to docstring
-/**Renders RoutesList and Navigation components */
+/**Renders RoutesList and Navigation components
+ * Sets values for user and token in context and sessionStorage
+ * Passes functions for login, logout, and signup to RoutesList
+ *
+ * Props:
+ * -None
+ *
+ * State:
+ * -user: TODO add more details
+ * -token
+ *
+ * App -> Navigation, RoutesList
+ */
 
 function App() {
+  //localStorage stillmight be better here
+  //session cookies are browser lifetime, sessionStorage tab specific
+  //if look up item in sessionstorage and not there it's null
 
-  const [user, setUser] = useState(localStorage.getItem('user'));
-  const [ token, setToken] = useState(localStorage.getItem('token'));
+  //should not be storing user in storage
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const isLoggedIn = user !== null;
+  //line indicates to others state is supposed to be null
+  //if have token load user data
+  //have effect that on mount fetches user data and sets state
+  //remove state of token, just set token to localstorage
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
 
   console.log("App user status", user);
 
-  /** AUTH  ********************************************************************/
+  // useEffect(function fetchUserFromAPI(){
+  //   setUser(getAndSetUser(jwtDecode(localStorage.getItem('token'))));
+  // }, [localStorage.getItem('token')]);
+
+  /** AUTH  ******************************************************************/
 
   /** Calls api for login and sets state of user*/
   async function login({ username, password }) {
@@ -28,7 +53,7 @@ function App() {
 
     setToken(tokenFromAPI);
     localStorage.setItem('token', tokenFromAPI);
-    getUserData(username);
+    getAndSetUser(username);
   }
 
   /** Calls api for registering a user and sets state of user*/
@@ -36,11 +61,11 @@ function App() {
     const tokenFromAPI =
       await JoblyApi.register(username, password, firstName, lastName, email);
 
-      setToken(tokenFromAPI);
-      getUserData(username);
+    setToken(tokenFromAPI);
+    getAndSetUser(username);
   }
 
-  /** Sets user state to null and removes token from localStorage */
+  /** Sets user state to null and removes token from sessionStorage */
   function logout() {
     setUser(null);
     localStorage.removeItem('token');
@@ -48,16 +73,25 @@ function App() {
   }
 
   /**
-   *  Make API request for authed user
+   *  Make API request for authed user, set user details in sessionStorage,
+   *  and set user state to contain user details
    */
-  //change name of fn and add to docstring more
-  async function getUserData(username) {
-    console.log("App >> getUserData, username", username);
+  async function getAndSetUser(username) {
+    console.log("App >> getAndSetUser, username", username);
     const { firstName, lastName, email, isAdmin, jobs } =
       await JoblyApi.getUserData(username);
 
     console.log("App >> getUserData, email", email);
-    localStorage.setItem('user',username);
+    //make object an explicit variable before either setting to session or state
+    localStorage.setItem('user', JSON.stringify(
+      {
+        username,
+        firstName,
+        lastName,
+        email,
+        isAdmin,
+        jobs
+      }));
     setUser(() => {
       return {
         username,
@@ -70,9 +104,10 @@ function App() {
     });
   }
 
+  //remove token from context
   return (
     <div className="App">
-      <userContext.Provider value={{ user, token }}>
+      <userContext.Provider value={{ isLoggedIn, user, token }}>
         <BrowserRouter>
           <Navigation logout={logout} />
           <RoutesList login={login} signup={signup} />

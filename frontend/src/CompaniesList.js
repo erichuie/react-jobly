@@ -3,7 +3,6 @@ import JoblyApi from "./api";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 
-/////////////////FIXME: REMOVE ME
 import { useContext } from "react";
 import userContext from "./userContext";
 
